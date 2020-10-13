@@ -8,5 +8,5 @@ app.get("/", (req: express.Request, res: express.Response) =>
 );
 
 app.listen(PORT, () => {
-  console.log(`🖥 [server]: server is running at https://localhost:${PORT}`);
+  console.log(`🖥 [server]: server is running at http://localhost:${PORT}`);
 });
