@@ -1,8 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+const baseUrl = process.env.REACT_APP_API_HOST || "/";
 
 function App() {
+  useEffect(() => {
+    const test = async () => {
+      const res = await fetch(`${baseUrl}api/`);
+      const text = await res.text();
+      console.log(text);
+    };
+
+    try {
+      test();
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
