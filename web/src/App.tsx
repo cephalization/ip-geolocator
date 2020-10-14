@@ -1,30 +1,15 @@
-import React, { useEffect } from "react";
-
-const baseUrl = process.env.REACT_APP_API_HOST || "/";
+import { Box, Grid } from "@chakra-ui/core";
+import React from "react";
 
 function App() {
-  useEffect(() => {
-    const test = async () => {
-      const res = await fetch(`${baseUrl}api/`);
-      const text = await res.text();
-      console.log(text);
-    };
-
-    try {
-      test();
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
   return (
-    <div>
-      <header>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid style={{ placeItems: "center" }} h="100vh" w="100%" bg="gray.50">
+      <Box
+        boxShadow="0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)"
+        p={4}
+        borderRadius={4}
+      ></Box>
+    </Grid>
   );
 }
 
