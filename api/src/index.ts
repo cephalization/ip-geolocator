@@ -1,11 +1,16 @@
-import express from "express";
+import express, { Router } from "express";
+import cors from "cors";
 
 const app = express();
-const PORT = 8000;
+const router = Router();
+const PORT = 8001;
 
-app.get("/", (req: express.Request, res: express.Response) =>
+router.get("/", (req: express.Request, res: express.Response) =>
   res.send("IP Geolocator")
 );
+
+app.use(cors());
+app.use("/api", router);
 
 app.listen(PORT, () => {
   console.log(`🖥 [server]: server is running at http://localhost:${PORT}`);
