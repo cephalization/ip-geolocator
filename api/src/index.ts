@@ -6,7 +6,7 @@ const router = Router();
 const PORT = 8001;
 
 router.get("/", (req: express.Request, res: express.Response) =>
-  res.send("IP Geolocator")
+  res.json({ message: "IP Geolocator" })
 );
 
 app.use(cors());
