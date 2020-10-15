@@ -2,7 +2,7 @@
   "name": "api",
   "scripts": {
     "copy-assets": "ts-node copyStaticAssets.ts",
-    "build": "tsc && npm run copyAssets",
+    "build": "tsc && npm run copy-assets",
     "lint": "tsc --noEmit",
     "start": "npm run build && npm run serve",
     "serve": "node dist/src/index.js",
