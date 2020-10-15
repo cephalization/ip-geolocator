@@ -8,10 +8,12 @@ import {
 } from "@chakra-ui/core";
 import React, { useCallback, useState } from "react";
 
+const ipPattern = "^(?:[0-9]{1,3}.){3}[0-9]{1,3}$";
+
 export const IPv4Form = ({ onSubmit }: { onSubmit: Function }) => {
   const [ip, setIp] = useState("");
 
-  const isValid = !!ip && ip.length >= 7;
+  const isValid = ip.match(ipPattern);
 
   /**
    * Controlled input component setter
@@ -62,6 +64,7 @@ export const IPv4Form = ({ onSubmit }: { onSubmit: Function }) => {
               w="80%"
               value={ip}
               onChange={handleInputChange}
+              pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
             />
             <Button variantColor="teal" type="submit" isDisabled={!isValid}>
               Submit
