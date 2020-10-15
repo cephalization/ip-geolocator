@@ -33,8 +33,8 @@ geolocatorController.get("/coordinates", (req: Request, res: Response) => {
   // ip address appears to be valid, look it up
   const result = dbLookup.get(ipAddress);
 
-  const latitude = result?.location?.latitude;
-  const longitude = result?.location?.longitude;
+  const latitude = result?.location?.latitude ?? null;
+  const longitude = result?.location?.longitude ?? null;
 
   // do we have coordinates?
   if (latitude === null || longitude === null) {
