@@ -61,7 +61,7 @@ export const IPv4Form = ({ onSubmit }: { onSubmit: Function }) => {
               name="ip-address"
               aria-describedby="ip-address-helper-text"
               placeholder="127.0.0.1"
-              w="80%"
+              w="70%"
               value={ip}
               onChange={handleInputChange}
               pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"

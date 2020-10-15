@@ -1,5 +1,5 @@
 import { ThemeProvider } from "emotion-theming";
-import { theme } from "@chakra-ui/core";
+import { CSSReset, theme } from "@chakra-ui/core";
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -8,6 +8,7 @@ import App from "./App";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <CSSReset />
       <App />
     </ThemeProvider>
   </React.StrictMode>,
