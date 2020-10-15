@@ -1,9 +1,25 @@
 import { Box, Divider, Grid, Text } from "@chakra-ui/core";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Geolocator } from "./components/Geolocator";
 import { IPv4Form } from "./components/IPv4Form";
 
 function App() {
+  const [address, setAddress] = useState("");
+
+  /**
+   * IPv4 Form Address submission handler
+   *
+   * @param {string} ipAddress - valid ipAddress entered by user
+   */
+  const handleSubmit: Function = useCallback(
+    (ipAddress: string) => {
+      if (ipAddress) {
+        setAddress(ipAddress);
+      }
+    },
+    [setAddress]
+  );
+
   return (
     <Grid style={{ placeItems: "center" }} h="100vh" w="100%">
       <Box
@@ -15,9 +31,9 @@ function App() {
         <Text fontSize="3xl" px={2} pb={6}>
           IPv4 Geolocator
         </Text>
-        <IPv4Form />
+        <IPv4Form onSubmit={handleSubmit} />
         <Divider />
-        <Geolocator url="" />
+        <Geolocator address={address} />
       </Box>
     </Grid>
   );

@@ -6,12 +6,44 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/core";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
-export const IPv4Form = () => {
+export const IPv4Form = ({ onSubmit }: { onSubmit: Function }) => {
+  const [ip, setIp] = useState("");
+
+  const isValid = !!ip && ip.length >= 7;
+
+  /**
+   * Controlled input component setter
+   *
+   * @param {React.ChangeEvent} e - input onChange event
+   */
+  const handleInputChange: React.ChangeEventHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => setIp(e.target.value),
+    [setIp]
+  );
+
+  /**
+   * Form submission handler
+   *
+   * @param {React.FormEvent} e - form onSubmit event
+   */
+  const handleSubmit: React.FormEventHandler = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+
+      // validate
+      if (!isValid) return;
+
+      // call parent submission handler
+      onSubmit(ip);
+    },
+    [onSubmit, isValid, ip]
+  );
+
   return (
     <Box py={4} px={2}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <FormControl>
           <FormLabel htmlFor="ip-address">IPv4 Address</FormLabel>
           <Box
@@ -28,8 +60,10 @@ export const IPv4Form = () => {
               aria-describedby="ip-address-helper-text"
               placeholder="127.0.0.1"
               w="80%"
+              value={ip}
+              onChange={handleInputChange}
             />
-            <Button variantColor="teal" type="submit">
+            <Button variantColor="teal" type="submit" isDisabled={!isValid}>
               Submit
             </Button>
           </Box>

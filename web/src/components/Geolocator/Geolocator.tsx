@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text } from "@chakra-ui/core";
+import { Box, Skeleton, Text } from "@chakra-ui/core";
 
 const EmptyState = () => (
   <Text fontSize="lg" opacity={0.5}>
@@ -21,26 +21,41 @@ const Container = ({ children }: { children: React.ReactNode }) => (
   </Box>
 );
 
-export const Geolocator = ({ url }: { url: string }) => {
-  const [address] = useState("");
+const loading = true;
 
-  if (!url)
+export const Geolocator = ({ address }: { address: string }) => {
+  const [coordinates] = useState("");
+
+  // user has not entered any input yet
+  if (!address) {
     return (
       <Container>
         <EmptyState />
       </Container>
     );
+  }
 
-  if (url && !address)
+  // user has entered input, we are loading translation request
+  if (address && loading) {
+    return (
+      <Container>
+        <Skeleton height="30px" />
+      </Container>
+    );
+  }
+
+  // user has entered input, we've finished loading, and we still don't have valid coords
+  if (address && !coordinates) {
     return (
       <Container>
         <ErrorState error="" />
       </Container>
     );
+  }
 
   return (
     <Container>
-      <ValidAddress>{address}</ValidAddress>
+      <ValidAddress>{coordinates}</ValidAddress>
     </Container>
   );
 };
