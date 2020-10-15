@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Skeleton, Text } from "@chakra-ui/core";
+import { useGeolocator } from "./useGeolocator";
 
 const EmptyState = () => (
   <Text fontSize="lg" opacity={0.5}>
@@ -8,7 +9,7 @@ const EmptyState = () => (
 );
 
 const ValidAddress = ({ children }: { children: React.ReactNode }) => (
-  <Text fontSize="2xl">{children || ""}</Text>
+  <Text fontSize="lg">{children || ""}</Text>
 );
 
 const ErrorState = ({ error }: { error: string }) => (
@@ -21,10 +22,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
   </Box>
 );
 
-const loading = true;
-
 export const Geolocator = ({ address }: { address: string }) => {
-  const [coordinates] = useState("");
+  const { coordinates, error, loading } = useGeolocator(address);
 
   // user has not entered any input yet
   if (!address) {
@@ -48,7 +47,7 @@ export const Geolocator = ({ address }: { address: string }) => {
   if (address && !coordinates) {
     return (
       <Container>
-        <ErrorState error="" />
+        <ErrorState error={error} />
       </Container>
     );
   }
